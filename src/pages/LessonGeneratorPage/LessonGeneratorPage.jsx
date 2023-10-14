@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../LessonGeneratorPage/LessonGenerator.scss";
 
 const grades = [
   { display: "1", value: "Grade 1" },
@@ -54,40 +55,52 @@ function LessonForm({ onSubmit }) {
   return (
     <>
       <h2>Create your lesson plan below</h2>
-      <form onSubmit={handleSubmit}>
-        <Dropdown label="Grade" items={grades} name="grades" />
-        <Dropdown label="Subject" items={subjects} name="subject" />
+      <form className="creator-form" onSubmit={handleSubmit}>
+        {/* grade */}
+        <div className="creator-form__grade">
+          <Dropdown label="Grade" items={grades} name="grades" />
+        </div>
+        {/* subject */}
+        <div className="creator-form__subject">
+          <Dropdown label="Subject" items={subjects} name="subject" />
+        </div>
+        {/* sub-subject */}
+        <div className="creator-form__subtopic">
+          <label htmlFor="subtopic">Sub-Topic if applicable</label>
+          <input
+            type="text"
+            value={subtopic}
+            onChange={(e) => setSubtopic(e.target.value)}
+            placeholder="ex: Electricity"
+          />
+        </div>
+        {/* lesson length */}
+        <div className="creator-form__lesson-length">
+          <label htmlFor="lessonLength">
+            Length of lesson and activity in minutes
+          </label>
+          <input
+            type="number"
+            value={lessonLength}
+            onChange={(e) => setLessonLength(e.target.value)}
+            placeholder="ex: 45"
+          />
+        </div>
 
-        <label htmlFor="subtopic">Sub-Topic if applicable</label>
-        <input
-          type="text"
-          value={subtopic}
-          onChange={(e) => setSubtopic(e.target.value)}
-          placeholder="ex: Electricity"
-        />
-
-        <label htmlFor="lessonLength">
-          Length of lesson and activity in minutes
-        </label>
-        <input
-          type="number"
-          value={lessonLength}
-          onChange={(e) => setLessonLength(e.target.value)}
-          placeholder="ex: 45"
-        />
-
-        <label htmlFor="quantityofstudents">
-          Anticipated number of students
-        </label>
-        <input
-          type="number"
-          value={studentCount}
-          onChange={(e) => setStudentCount(e.target.value)}
-          placeholder="ex: 30"
-        />
-        {/* change to checkbox */}
-        <fieldset>
-          <legend>Tech available? Select "No" if unsure</legend>
+        <div className="creator-form__quantity-students">
+          <label htmlFor="quantityofstudents">
+            Anticipated number of students
+          </label>
+          <input
+            type="number"
+            value={studentCount}
+            onChange={(e) => setStudentCount(e.target.value)}
+            placeholder="ex: 30"
+          />
+        </div>
+        {/* change to checkbox? */}
+        <div className="creator-form__tech-available">
+          <div>Tech available? Select "No" if unsure</div>
           <RadioInput
             id="techYes"
             name="tech__available"
@@ -102,24 +115,26 @@ function LessonForm({ onSubmit }) {
             stateSetter={setTechAvailable}
             label="No"
           />
-        </fieldset>
+        </div>
 
         {/* t/f boolean not string */}
         {techAvailable === "yes" && (
           <>
-            <label htmlFor="devicesCount">How many devices available?</label>
-            <input
-              type="number"
-              value={devicesCount}
-              onChange={(e) => setDevicesCount(e.target.value)}
-              placeholder="ex: 25"
-            />
+            <div className="creator-form__number-devices">
+              <label htmlFor="devicesCount">How many devices available?</label>
+              <input
+                type="number"
+                value={devicesCount}
+                onChange={(e) => setDevicesCount(e.target.value)}
+                placeholder="ex: 25"
+              />
+            </div>
             {/* change to checkbox */}
-            <fieldset>
-              <legend>
+            <div className="creator-form__devices-sound">
+              <div>
                 Will they have access to headphones or devices that make sound?
-                Select "No" if unsure.
-              </legend>
+                Select "No" if unsure.{" "}
+              </div>
               <RadioInput
                 id="soundYes"
                 name="sound__available"
@@ -134,36 +149,40 @@ function LessonForm({ onSubmit }) {
                 stateSetter={setSoundAvailable}
                 label="No"
               />
-            </fieldset>
+            </div>
           </>
         )}
         {/* other materials available */}
-        <label htmlFor="materialsAvailable">
-          All other materials available
-        </label>
-        <input
-          type="text"
-          value={materialsAvailable}
-          onChange={(e) => setMaterialsAvailable(e.target.value)}
-          placeholder="ex: 24 whiteboards and markers, colouring crayons"
-        />
+        <div className="creator-form__other-materials">
+          <label htmlFor="materialsAvailable">
+            All other materials available
+          </label>
+          <input
+            type="text"
+            value={materialsAvailable}
+            onChange={(e) => setMaterialsAvailable(e.target.value)}
+            placeholder="ex: 24 whiteboards and markers, colouring crayons"
+          />
+        </div>
         {/* teacher involvement */}
-        <div class="slidecontainer">
+        <div className="slidecontainer">
           <label for="teacherInvolvement">Teacher involvement</label>
-          <div class="slider-labels">
-            <span class="min-label">Student-led</span>
+          <div className="slider-labels">
+            <span className="min-label">Student-led</span>
             <input
               type="range"
               min="1"
               max="100"
-              class="slider"
+              className="slider"
               id="teacherInvolvement"
             />
-            <span class="max-label">Teacher-led</span>
+            <span className="max-label">Teacher-led</span>
           </div>
         </div>
 
-        <button type="submit">Create Lesson Now</button>
+        <button className="creator-form__button" type="submit">
+          Create Lesson Now
+        </button>
       </form>
     </>
   );

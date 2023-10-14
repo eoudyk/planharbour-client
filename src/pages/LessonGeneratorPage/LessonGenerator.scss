@@ -1,0 +1,49 @@
+.creator-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  &__grade {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__subject {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__subtopic {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__lesson-length {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__quantity-students {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__tech-available {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__number-devices {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__devices-sound {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__other-materials {
+    display: flex;
+    padding: 0.5rem;
+  }
+  &__button {
+    width: 15rem;
+    padding: 0.5rem;
+  }
+  .slidecontainer {
+    display: flex;
+    padding: 0.5rem;
+  }
+}

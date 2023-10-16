@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../LessonGeneratorPage/LessonGenerator.scss";
+import axios from "axios";
 
 const grades = [
   { display: "1", value: "Grade 1" },
@@ -30,7 +31,7 @@ const subjects = [
   { display: "Music", value: "Music" },
   { display: "Core French", value: "Core French" },
 ];
-function LessonForm({ onSubmit }) {
+function LessonForm() {
   const [subtopic, setSubtopic] = useState("");
   const [lessonLength, setLessonLength] = useState("");
   const [studentCount, setStudentCount] = useState("");
@@ -39,9 +40,14 @@ function LessonForm({ onSubmit }) {
   const [soundAvailable, setSoundAvailable] = useState("");
   const [materialsAvailable, setMaterialsAvailable] = useState("");
 
-  const handleSubmit = (e) => {
+  const [gptResponse, setGptResponse] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit({
+
+    const formData = {
+      grade: document.getElementById("grades").value,
+      subject: document.getElementById("subject").value,
       subtopic,
       lessonLength,
       studentCount,
@@ -49,7 +55,21 @@ function LessonForm({ onSubmit }) {
       devicesCount,
       soundAvailable,
       materialsAvailable,
-    });
+      teacherInvolvement: document.getElementById("teacherInvolvement").value,
+    };
+
+    try {
+      const prompt = `Create a lesson plan for ${formData.grade} on ${formData.subject}, specifically ${formData.subtopic}, lasting ${formData.lessonLength} minutes for ${formData.studentCount} students. Tech available: ${formData.techAvailable}, devices: ${formData.devicesCount}, can the devices play sound: ${formData.soundAvailable} please list any specific websites or make suggestions to specific sites they/the teacher should visit. Other materials: ${formData.materialsAvailable}. Teacher involvement on a scale from 1-100 wheras 1 is entirely student led and 100 is extremely guided by the teacher: ${formData.teacherInvolvement}. Include any mockup worksheets or handouts you may suggest in full. Include at least 1 open-ended extension activity`;
+
+      const response = await axios.post("http://localhost:8080/sendToGPT", {
+        prompt,
+      });
+
+      setGptResponse(response.data.message);
+      console.log(response.data.message);
+    } catch (error) {
+      console.error("Error sending data to GPT-3:", error);
+    }
   };
 
   return (

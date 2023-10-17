@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LessonGeneratorPage from "./pages/LessonGeneratorPage/LessonGeneratorPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <div className="app">
           <Routes>
             <Route path="/" element={<LessonGeneratorPage />} />
-            {/* <Route path="/login" element={<LoginPage />} /> */}
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/create" element={<LessonGeneratorPage />} />
           </Routes>
         </div>

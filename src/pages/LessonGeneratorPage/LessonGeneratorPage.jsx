@@ -41,6 +41,7 @@ function LessonForm() {
   const [materialsAvailable, setMaterialsAvailable] = useState("");
 
   const [gptResponse, setGptResponse] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,17 +59,20 @@ function LessonForm() {
       teacherInvolvement: document.getElementById("teacherInvolvement").value,
     };
 
-    try {
-      const prompt = `Create a lesson plan for ${formData.grade} on ${formData.subject}, specifically ${formData.subtopic}, lasting ${formData.lessonLength} minutes for ${formData.studentCount} students. Tech available: ${formData.techAvailable}, devices: ${formData.devicesCount}, can the devices play sound: ${formData.soundAvailable} please list any specific websites or make suggestions to specific sites they/the teacher should visit. Other materials: ${formData.materialsAvailable}. Teacher involvement on a scale from 1-100 wheras 1 is entirely student led and 100 is extremely guided by the teacher: ${formData.teacherInvolvement}. Include any mockup worksheets or handouts you may suggest in full. Include at least 1 open-ended extension activity`;
+    const prompt = `Create a lesson plan for ${formData.grade} on ${formData.subject}, specifically ${formData.subtopic}, lasting ${formData.lessonLength} minutes for ${formData.studentCount} students. Tech available: ${formData.techAvailable}, devices: ${formData.devicesCount}, can the devices play sound: ${formData.soundAvailable} please list any specific websites or make suggestions to specific sites they/the teacher should visit. Other materials: ${formData.materialsAvailable}. Teacher involvement on a scale from 1-100 wheras 1 is entirely student led and 100 is extremely guided by the teacher: ${formData.teacherInvolvement}. Include any mockup worksheets or handouts you may suggest in full. Include at least 1 open-ended extension activity`;
 
+    try {
+      setIsLoading(true); //start loading
       const response = await axios.post("http://localhost:8080/sendToGPT", {
         prompt,
       });
 
       setGptResponse(response.data.message);
+      setIsLoading(false);
       console.log(response.data.message);
     } catch (error) {
       console.error("Error sending data to GPT-3:", error);
+      setIsLoading(false);
     }
   };
 
@@ -78,15 +82,15 @@ function LessonForm() {
       <form className="creator-form" onSubmit={handleSubmit}>
         {/* grade */}
         <div className="creator-form__grade">
-          <Dropdown label="Grade" items={grades} name="grades" />
+          <Dropdown label="Grade:" items={grades} name="grades" />
         </div>
         {/* subject */}
         <div className="creator-form__subject">
-          <Dropdown label="Subject" items={subjects} name="subject" />
+          <Dropdown label="Subject:" items={subjects} name="subject" />
         </div>
         {/* sub-subject */}
         <div className="creator-form__subtopic">
-          <label htmlFor="subtopic">Sub-Topic if applicable</label>
+          <label htmlFor="subtopic">Sub-Topic if applicable: </label>
           <input
             type="text"
             value={subtopic}
@@ -97,7 +101,7 @@ function LessonForm() {
         {/* lesson length */}
         <div className="creator-form__lesson-length">
           <label htmlFor="lessonLength">
-            Length of lesson and activity in minutes
+            Length of lesson and activity in minutes:
           </label>
           <input
             type="number"
@@ -109,7 +113,7 @@ function LessonForm() {
 
         <div className="creator-form__quantity-students">
           <label htmlFor="quantityofstudents">
-            Anticipated number of students
+            Anticipated number of students:
           </label>
           <input
             type="number"
@@ -120,7 +124,7 @@ function LessonForm() {
         </div>
         {/* change to checkbox? */}
         <div className="creator-form__tech-available">
-          <div>Tech available? Select "No" if unsure</div>
+          <div>Tech available? Select "No" if unsure: </div>
           <RadioInput
             id="techYes"
             name="tech__available"
@@ -153,7 +157,7 @@ function LessonForm() {
             <div className="creator-form__devices-sound">
               <div>
                 Will they have access to headphones or devices that make sound?
-                Select "No" if unsure.{" "}
+                Select "No" if unsure:{" "}
               </div>
               <RadioInput
                 id="soundYes"
@@ -175,7 +179,7 @@ function LessonForm() {
         {/* other materials available */}
         <div className="creator-form__other-materials">
           <label htmlFor="materialsAvailable">
-            All other materials available
+            All other materials available:
           </label>
           <input
             type="text"
@@ -186,7 +190,7 @@ function LessonForm() {
         </div>
         {/* teacher involvement */}
         <div className="slidecontainer">
-          <label for="teacherInvolvement">Teacher involvement</label>
+          <label for="teacherInvolvement">Teacher involvement:</label>
           <div className="slider-labels">
             <span className="min-label">Student-led</span>
             <input
@@ -204,6 +208,16 @@ function LessonForm() {
           Create Lesson Now
         </button>
       </form>
+
+      {isLoading && <div>Loading...</div>}
+
+      {gptResponse && (
+        <>
+          <h2>Generated Lesson Plan</h2>
+          <pre className="gpt__response">{gptResponse}</pre>
+          <button className="save__lesson-button">Save Lesson</button>
+        </>
+      )}
     </>
   );
 }

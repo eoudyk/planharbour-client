@@ -1,5 +1,9 @@
+.creator-form__title {
+  padding-left: 1rem;
+}
 .creator-form {
   display: flex;
+  padding-left: 1rem;
   flex-direction: column;
   align-items: left;
   &__grade {

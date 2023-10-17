@@ -78,7 +78,7 @@ function LessonForm() {
 
   return (
     <>
-      <h2>Create your lesson plan below</h2>
+      <h2 className="creator-form__title">Create your lesson plan below</h2>
       <form className="creator-form" onSubmit={handleSubmit}>
         {/* grade */}
         <div className="creator-form__grade">

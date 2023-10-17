@@ -2,10 +2,12 @@ import "./App.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import LoginPage from "./pages/LoginPage/LoginPage";
 import LessonGeneratorPage from "./pages/LessonGeneratorPage/LessonGeneratorPage";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <>
+      <Header />
       <BrowserRouter>
         <div className="app">
           <Routes>

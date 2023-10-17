@@ -69,7 +69,7 @@ function LessonForm() {
 
       setGptResponse(response.data.message);
       setIsLoading(false);
-      console.log(response.data.message);
+      //   console.log(response.data.message);
     } catch (error) {
       console.error("Error sending data to GPT-3:", error);
       setIsLoading(false);

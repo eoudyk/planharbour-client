@@ -5,6 +5,7 @@
 .creator-form {
   display: flex;
   padding-left: 1rem;
+  padding-bottom: 2rem;
   flex-direction: column;
   align-items: left;
   &__grade {
@@ -49,6 +50,7 @@
     border-radius: 1rem;
     background-color: #1f7a8c;
     color: #ffffff;
+    margin-top: 1rem;
   }
   &__button:hover {
     background-color: #022b3a;

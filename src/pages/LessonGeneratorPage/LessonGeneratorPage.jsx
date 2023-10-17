@@ -213,8 +213,8 @@ function LessonForm() {
 
       {gptResponse && (
         <>
-          <h2>Generated Lesson Plan:</h2>
-          <pre className="gpt__response">{gptResponse}</pre>
+          <h2 className="gpt-response__title">Generated Lesson Plan:</h2>
+          <pre className="gpt-response__content">{gptResponse}</pre>
           <button className="save__lesson-button">Save Lesson</button>
           <button className="export__lesson-button">Export to pdf</button>
         </>

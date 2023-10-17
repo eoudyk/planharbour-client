@@ -1,5 +1,6 @@
 .creator-form__title {
   padding-left: 1rem;
+  padding-top: 1rem;
 }
 .creator-form {
   display: flex;
@@ -45,6 +46,12 @@
   &__button {
     width: 15rem;
     padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: #1f7a8c;
+    color: #ffffff;
+  }
+  &__button:hover {
+    background-color: #022b3a;
   }
   .slidecontainer {
     display: flex;
@@ -55,23 +62,41 @@
   }
 }
 
-.gpt__response {
+.gpt-response__title {
+  margin-top: 1rem;
+}
+.gpt-response__content {
   white-space: pre-wrap;
   font-family: "Tahoma", sans-serif;
   font-size: 16px;
   border: 1px solid #e0e0e0;
   padding: 15px;
-  background-color: #f8f8f8;
+  background-color: #bfdbf7;
   border-radius: 4px;
 }
 
 .save__lesson-button {
   width: 15rem;
   padding: 0.5rem;
+  background-color: #1f7a8c;
+  color: #ffffff;
+  border-radius: 1rem;
+}
+
+.save__lesson-button:hover {
+  background-color: #022b3a;
 }
 
 .export__lesson-button {
   width: 15rem;
   padding: 0.5rem;
   margin: 1rem;
+  margin-bottom: 10rem;
+  background-color: #1f7a8c;
+  color: #ffffff;
+  border-radius: 1rem;
+}
+
+.export__lesson-button:hover {
+  background-color: #022b3a;
 }

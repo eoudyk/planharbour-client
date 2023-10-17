@@ -20,8 +20,8 @@ const grades = [
   { display: "8", value: "Grade 8" },
 ];
 const subjects = [
-  { display: "Science", value: "Science" },
   { display: "Math", value: "Math" },
+  { display: "Science", value: "Science" },
   { display: "English Language Arts", value: "English Language Arts" },
   { display: "Social Studies", value: "Social Studies" },
   { display: "History", value: "History" },
@@ -213,9 +213,10 @@ function LessonForm() {
 
       {gptResponse && (
         <>
-          <h2>Generated Lesson Plan</h2>
+          <h2>Generated Lesson Plan:</h2>
           <pre className="gpt__response">{gptResponse}</pre>
           <button className="save__lesson-button">Save Lesson</button>
+          <button className="export__lesson-button">Export to pdf</button>
         </>
       )}
     </>

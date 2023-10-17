@@ -52,6 +52,8 @@
 }
 
 .gpt__response {
+  white-space: pre-wrap;
+  font-family: "Tahoma", sans-serif;
   font-size: 16px;
   border: 1px solid #e0e0e0;
   padding: 15px;
@@ -62,4 +64,10 @@
 .save__lesson-button {
   width: 15rem;
   padding: 0.5rem;
+}
+
+.export__lesson-button {
+  width: 15rem;
+  padding: 0.5rem;
+  margin: 1rem;
 }

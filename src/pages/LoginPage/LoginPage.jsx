@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "../LoginPage/LoginPage.scss";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
+    // put verification here
+    navigate("/user-home");
   };
   return (
     <>

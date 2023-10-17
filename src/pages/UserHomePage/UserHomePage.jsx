@@ -15,10 +15,24 @@ function UserHomePage() {
           <h4 className="user-home__lesson-previous">
             Previously created lessons:
           </h4>
+          <div className="lesson-card">
+            <p className="grade">Grade: 6</p>
+            <p className="subject">Subject: Math</p>
+            <p className="subtopic">Subtopic: Algebra</p>
+            <p className="date_created">Date Created: October 17, 2023</p>
+          </div>
+          <div className="lesson-card">
+            <p className="grade">Grade: 6</p>
+            <p className="subject">Subject: Math</p>
+            <p className="subtopic">Subtopic: Data Management</p>
+            <p className="date_created">Date Created: October 18, 2023</p>
+          </div>
         </div>
-        <button className="user-home__create-button">
-          Create a new lesson
-        </button>
+        <form onSubmit={handleCreateLesson}>
+          <button className="user-home__create-button">
+            Create a new lesson
+          </button>
+        </form>
       </div>
     </>
   );

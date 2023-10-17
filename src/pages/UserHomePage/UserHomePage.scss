@@ -1,0 +1,25 @@
+.user-home {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  &__create-button {
+    width: 15rem;
+    padding: 0.5rem;
+    background-color: #1f7a8c;
+    color: #ffffff;
+    border-radius: 1rem;
+  }
+  &__create-button:hover {
+    background-color: #022b3a;
+  }
+}
+
+.lesson-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #e1e5f2;
+  width: 20rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+}

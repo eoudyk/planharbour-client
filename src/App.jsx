@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import LoginPage from "./pages/LoginPage/LoginPage";
 import LessonGeneratorPage from "./pages/LessonGeneratorPage/LessonGeneratorPage";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

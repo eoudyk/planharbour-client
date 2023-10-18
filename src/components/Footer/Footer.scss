@@ -1,13 +1,15 @@
+@use "../../styles/partials/variables" as *;
+
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 5rem;
   width: 100%;
-  color: #ffffff;
+  color: $primary-white;
   font-size: xx-small;
   position: fixed;
   bottom: 0;
-  background-color: #1f7a8c;
+  background-color: $primary-color;
   margin-top: 1rem;
 }

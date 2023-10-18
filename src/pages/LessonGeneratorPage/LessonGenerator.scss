@@ -1,3 +1,5 @@
+@use "../../styles/partials/variables" as *;
+
 .creator-form__title {
   padding-left: 1rem;
   padding-top: 1rem;
@@ -48,12 +50,12 @@
     width: 15rem;
     padding: 0.5rem;
     border-radius: 1rem;
-    background-color: #1f7a8c;
-    color: #ffffff;
+    background-color: $primary-color;
+    color: $primary-white;
     margin-top: 1rem;
   }
   &__button:hover {
-    background-color: #022b3a;
+    background-color: $secondary-accent;
   }
   .slidecontainer {
     display: flex;
@@ -72,22 +74,22 @@
   white-space: pre-wrap;
   font-family: "Tahoma", sans-serif;
   font-size: 16px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid $primary-grey;
   padding: 15px;
-  background-color: #bfdbf7;
+  background-color: $primary-light-color;
   border-radius: 4px;
 }
 
 .save__lesson-button {
   width: 15rem;
   padding: 0.5rem;
-  background-color: #1f7a8c;
-  color: #ffffff;
+  background-color: $primary-color;
+  color: $primary-white;
   border-radius: 1rem;
 }
 
 .save__lesson-button:hover {
-  background-color: #022b3a;
+  background-color: $secondary-accent;
 }
 
 .export__lesson-button {
@@ -95,11 +97,11 @@
   padding: 0.5rem;
   margin: 1rem;
   margin-bottom: 10rem;
-  background-color: #1f7a8c;
-  color: #ffffff;
+  background-color: $primary-color;
+  color: $primary-white;
   border-radius: 1rem;
 }
 
 .export__lesson-button:hover {
-  background-color: #022b3a;
+  background-color: $secondary-accent;
 }

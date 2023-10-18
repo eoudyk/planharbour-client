@@ -1,3 +1,5 @@
+@use "../../styles/partials/variables" as *;
+
 .user-home {
   display: flex;
   flex-direction: column;
@@ -5,19 +7,19 @@
   &__create-button {
     width: 15rem;
     padding: 0.5rem;
-    background-color: #1f7a8c;
-    color: #ffffff;
+    background-color: $primary-color;
+    color: $primary-white;
     border-radius: 1rem;
   }
   &__create-button:hover {
-    background-color: #022b3a;
+    background-color: $secondary-accent;
   }
 }
 
 .lesson-card {
   display: flex;
   flex-direction: column;
-  background-color: #e1e5f2;
+  background-color: $primary-grey;
   width: 20rem;
   border-radius: 1rem;
   padding: 1rem;

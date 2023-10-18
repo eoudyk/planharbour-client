@@ -1,7 +1,8 @@
+@use "../../styles/partials/variables" as *;
+
 .header {
-  background-color: #e1e5f2;
+  background-color: $primary-grey;
   height: 6rem;
-  border-bottom: 1px solid #e1e5f2;
   padding: 0 1rem;
   display: flex;
   align-items: center;

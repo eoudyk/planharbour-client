@@ -65,7 +65,7 @@ function LessonForm() {
         formData
       );
       if (response.data.success) {
-        alert("Lesson saved to database successfully!");
+        alert("Lesson saved to your database successfully!");
       } else {
         alert("Error saving lesson: " + response.data.message);
       }
@@ -102,7 +102,6 @@ function LessonForm() {
 
       setGptResponse(response.data.message);
       setIsLoading(false);
-      //   console.log(response.data.message);
     } catch (error) {
       console.error("Error sending data to GPT-3:", error);
       setIsLoading(false);

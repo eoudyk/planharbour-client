@@ -1,5 +1,5 @@
 import "../Header/Header.scss";
-import Logo from "../../assets/planharbour-logoshort.svg";
+import Logo from "../../assets/PLANHARBOUR.logo.svg";
 
 const Header = () => {
   return (

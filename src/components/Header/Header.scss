@@ -3,7 +3,9 @@
   height: 6rem;
   border-bottom: 1px solid #e1e5f2;
   padding: 0 1rem;
+  display: flex;
+  align-items: center;
   .navbar__logo {
-    height: 6rem;
+    height: 5rem;
   }
 }

@@ -224,15 +224,23 @@ function LessonForm() {
         <div className="slidecontainer">
           <label for="teacherInvolvement">Teacher involvement:</label>
           <div className="slider-labels">
-            <span className="min-label">Student-led</span>
+            <span className="min-label">Student-led </span>
             <input
               type="range"
               min="1"
               max="100"
               className="slider"
               id="teacherInvolvement"
+              list="steplist"
             />
-            <span className="max-label">Teacher-led</span>
+            <datalist id="steplist">
+              <option>1</option>
+              <option>25</option>
+              <option>50</option>
+              <option>75</option>
+              <option>100</option>
+            </datalist>
+            <span className="max-label"> Teacher-led</span>
           </div>
         </div>
 

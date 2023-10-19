@@ -4,6 +4,7 @@ import axios from "axios";
 import { grades } from "./constants/grades";
 import { subjects } from "./constants/subjects";
 import html2pdf from "html2pdf.js";
+import Loader from "../../components/Loader/Loader";
 
 function LessonForm() {
   const [grade, setGrade] = useState(grades[0].value);
@@ -237,7 +238,14 @@ function LessonForm() {
         </button>
       </form>
 
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="loading-response">
+          <div>
+            <Loader />
+          </div>
+          <div> Loading...</div>
+        </div>
+      )}
 
       {gptResponse && (
         <>

@@ -21,10 +21,20 @@ function UserHomePage() {
     fetchLessons();
   }, []);
 
+  const handleDeleteLesson = async (lessonId) => {
+    try {
+      await axios.delete(`http://localhost:8080/deleteLesson/${lessonId}`);
+      setLessons(lessons.filter((lesson) => lesson.id !== lessonId));
+    } catch (error) {
+      console.error("Error deleting lesson:", error);
+    }
+  };
+
   const handleCreateLesson = async (e) => {
     e.preventDefault();
     navigate("/create");
   };
+
   return (
     <>
       <div className="user-home">
@@ -39,9 +49,14 @@ function UserHomePage() {
               <p className="subject">Subject: {lesson.subject}</p>
               <p className="subtopic">Subtopic: {lesson.subtopic}</p>
               <p className="date_created">
-                Date Created:{" "}
-                {new Date(lesson.date_created).toLocaleDateString()}
+                Date Created: {new Date(lesson.updated_at).toLocaleDateString()}
               </p>
+              <button
+                className="delete__button"
+                onClick={() => handleDeleteLesson(lesson.id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>

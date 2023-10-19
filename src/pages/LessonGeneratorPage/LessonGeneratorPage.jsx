@@ -20,6 +20,7 @@ function LessonForm() {
 
   const [gptResponse, setGptResponse] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const formDataHelper = {
     grade,
@@ -33,6 +34,48 @@ function LessonForm() {
     materialsAvailable,
     teacherInvolvement,
     gptResponse,
+  };
+
+  //form validation:
+  const validateForm = () => {
+    let errors = {};
+    if (!lessonLength) {
+      errors.lessonLength = true;
+    }
+    if (!studentCount) {
+      errors.studentCount = true;
+    }
+    if (!techAvailable) {
+      errors.techAvailable = "Tech availability is required";
+    }
+    return errors;
+  };
+
+  //submit form:
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // so form doesn't submit if there are key missing inputs:
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    const prompt = `Create a lesson plan for ${formDataHelper.grade} on ${formDataHelper.subject}, specifically ${formDataHelper.subtopic}, lasting ${formDataHelper.lessonLength} minutes for ${formDataHelper.studentCount} students. Tech available: ${formDataHelper.techAvailable}, devices: ${formDataHelper.devicesCount}, can the devices play sound: ${formDataHelper.soundAvailable} please list any specific websites or make suggestions to specific sites they/the teacher should visit. Other materials: ${formDataHelper.materialsAvailable}. Teacher involvement on a scale from 1-100 wheras 1 is entirely student led and 100 is extremely guided by the teacher: ${formDataHelper.teacherInvolvement}. Include any mockup worksheets or handouts you may suggest in full. Include at least 1 open-ended extension activity`;
+
+    try {
+      setIsLoading(true); //start loading
+      const response = await axios.post("http://localhost:8080/sendToGPT", {
+        prompt,
+      });
+
+      setGptResponse(response.data.message);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error sending data to GPT-3:", error);
+      setIsLoading(false);
+    }
   };
 
   // save to DB:
@@ -50,26 +93,6 @@ function LessonForm() {
     } catch (error) {
       console.error("Error:", error);
       alert("Error saving lesson. Please try again.");
-    }
-  };
-
-  //submit form:
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const prompt = `Create a lesson plan for ${formDataHelper.grade} on ${formDataHelper.subject}, specifically ${formDataHelper.subtopic}, lasting ${formDataHelper.lessonLength} minutes for ${formDataHelper.studentCount} students. Tech available: ${formDataHelper.techAvailable}, devices: ${formDataHelper.devicesCount}, can the devices play sound: ${formDataHelper.soundAvailable} please list any specific websites or make suggestions to specific sites they/the teacher should visit. Other materials: ${formDataHelper.materialsAvailable}. Teacher involvement on a scale from 1-100 wheras 1 is entirely student led and 100 is extremely guided by the teacher: ${formDataHelper.teacherInvolvement}. Include any mockup worksheets or handouts you may suggest in full. Include at least 1 open-ended extension activity`;
-
-    try {
-      setIsLoading(true); //start loading
-      const response = await axios.post("http://localhost:8080/sendToGPT", {
-        prompt,
-      });
-
-      setGptResponse(response.data.message);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error sending data to GPT-3:", error);
-      setIsLoading(false);
     }
   };
 
@@ -128,6 +151,7 @@ function LessonForm() {
             value={lessonLength}
             onChange={(e) => setLessonLength(e.target.value)}
             placeholder="ex: 45"
+            className={formErrors.lessonLength ? "input-error" : ""}
           />
         </div>
 
@@ -140,9 +164,9 @@ function LessonForm() {
             value={studentCount}
             onChange={(e) => setStudentCount(e.target.value)}
             placeholder="ex: 30"
+            className={formErrors.studentCount ? "input-error" : ""}
           />
         </div>
-        {/* change to checkbox? */}
         <div className="creator-form__tech-available">
           <div>Tech available? Select "No" if unsure: </div>
           <RadioInput
@@ -159,9 +183,11 @@ function LessonForm() {
             stateSetter={setTechAvailable}
             label="No"
           />
+          {formErrors.techAvailable && (
+            <p className="form-error">{formErrors.techAvailable}</p>
+          )}
         </div>
 
-        {/* t/f boolean not string */}
         {techAvailable === "yes" && (
           <>
             <div className="creator-form__number-devices">
@@ -173,7 +199,6 @@ function LessonForm() {
                 placeholder="ex: 25"
               />
             </div>
-            {/* change to checkbox */}
             <div className="creator-form__devices-sound">
               <div>
                 Will they have access to headphones or devices that make sound?
@@ -208,7 +233,7 @@ function LessonForm() {
             placeholder="ex: 24 whiteboards and markers, colouring crayons"
           />
         </div>
-        {/* teacher involvement */}
+        {/* teacher involvement, 1= mostly student led, 100= mostly teacher led */}
         <div className="slidecontainer">
           <label htmlFor="teacherInvolvement">Teacher involvement:</label>
           <div className="slider-labels">

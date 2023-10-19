@@ -67,6 +67,18 @@
   }
 }
 
+//error styling:
+.form-error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+//loading animation spacing
 .loading-response {
   margin-left: 5.5rem;
   margin-top: 1rem;

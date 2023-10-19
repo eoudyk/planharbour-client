@@ -80,6 +80,22 @@
   border-radius: 4px;
 }
 
+.gpt-response__update {
+  padding: 1rem;
+}
+
+.resubmit__button {
+  width: 15rem;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  background-color: $primary-color;
+  color: $primary-white;
+  border-radius: 1rem;
+}
+.resubmit__button:hover {
+  background-color: $secondary-accent;
+}
+
 .save__lesson-button {
   width: 15rem;
   padding: 0.5rem;

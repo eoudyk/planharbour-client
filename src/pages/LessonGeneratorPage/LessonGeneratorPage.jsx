@@ -231,6 +231,13 @@ function LessonForm() {
         <>
           <h2 className="gpt-response__title">Generated Lesson Plan:</h2>
           <pre className="gpt-response__content">{gptResponse}</pre>
+          <form>
+            <div className="gpt-response__update">
+              <label htmlFor="update">Any changes?</label>
+              <input type="text" placeholder="ex: No devices" />
+              <button className="resubmit__button">Resubmit</button>
+            </div>
+          </form>
           <button className="save__lesson-button" onClick={handleSaveToDB}>
             Save Lesson
           </button>

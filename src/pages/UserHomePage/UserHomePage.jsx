@@ -1,8 +1,26 @@
 import "../UserHomePage/UserHomePage.scss";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function UserHomePage() {
+  const [lessons, setLessons] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // fetch lesson plans when the component mounts
+    const fetchLessons = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/getLessons");
+        setLessons(response.data.lessons);
+      } catch (error) {
+        console.error("Error fetching lessons:", error);
+      }
+    };
+
+    fetchLessons();
+  }, []);
+
   const handleCreateLesson = async (e) => {
     e.preventDefault();
     navigate("/create");
@@ -15,18 +33,17 @@ function UserHomePage() {
           <h4 className="user-home__lesson-previous">
             Previously created lessons:
           </h4>
-          <div className="lesson-card">
-            <p className="grade">Grade: 6</p>
-            <p className="subject">Subject: Math</p>
-            <p className="subtopic">Subtopic: Algebra</p>
-            <p className="date_created">Date Created: October 17, 2023</p>
-          </div>
-          <div className="lesson-card">
-            <p className="grade">Grade: 6</p>
-            <p className="subject">Subject: Math</p>
-            <p className="subtopic">Subtopic: Data Management</p>
-            <p className="date_created">Date Created: October 18, 2023</p>
-          </div>
+          {lessons.map((lesson, index) => (
+            <div key={index} className="lesson-card">
+              <p className="grade">Grade: {lesson.grade}</p>
+              <p className="subject">Subject: {lesson.subject}</p>
+              <p className="subtopic">Subtopic: {lesson.subtopic}</p>
+              <p className="date_created">
+                Date Created:{" "}
+                {new Date(lesson.date_created).toLocaleDateString()}
+              </p>
+            </div>
+          ))}
         </div>
         <form onSubmit={handleCreateLesson}>
           <button className="user-home__create-button">

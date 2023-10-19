@@ -3,6 +3,7 @@ import "../LessonGeneratorPage/LessonGenerator.scss";
 import axios from "axios";
 import { grades } from "./constants/grades";
 import { subjects } from "./constants/subjects";
+import html2pdf from "html2pdf.js";
 
 function LessonForm() {
   const [grade, setGrade] = useState(grades[0].value);
@@ -69,6 +70,17 @@ function LessonForm() {
       console.error("Error sending data to GPT-3:", error);
       setIsLoading(false);
     }
+  };
+
+  // save to pdf:
+  const handleExportToPDF = () => {
+    const content = document.getElementById("gpt-response-content");
+    const pdf = html2pdf().from(content).outputPdf();
+    const blob = new Blob([pdf], { type: "application/pdf" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "lesson_plan.pdf";
+    link.click();
   };
 
   return (
@@ -230,7 +242,9 @@ function LessonForm() {
       {gptResponse && (
         <>
           <h2 className="gpt-response__title">Generated Lesson Plan:</h2>
-          <pre className="gpt-response__content">{gptResponse}</pre>
+          <pre className="gpt-response__content" id="gpt-response-content">
+            {gptResponse}
+          </pre>
           <form>
             <div className="gpt-response__update">
               <label htmlFor="update">Any changes?</label>
@@ -241,7 +255,9 @@ function LessonForm() {
           <button className="save__lesson-button" onClick={handleSaveToDB}>
             Save Lesson
           </button>
-          <button className="export__lesson-button">Export to pdf</button>
+          <button className="export__lesson-button" onClick={handleExportToPDF}>
+            Export to pdf
+          </button>
         </>
       )}
     </>

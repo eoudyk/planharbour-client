@@ -10,8 +10,8 @@ import UserHomePage from "./pages/UserHomePage/UserHomePage";
 function App() {
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header />
         <div className="app">
           <Routes>
             <Route path="/" element={<LessonGeneratorPage />} />
@@ -20,8 +20,8 @@ function App() {
             <Route path="/create" element={<LessonGeneratorPage />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </>
   );
 }

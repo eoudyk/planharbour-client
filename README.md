@@ -1,7 +1,7 @@
 
 # PlanHarbour
 
-Final captstone project for Brainstation Diploma Project. 
+Final captstone project for Brainstation Diploma Program. 
 
 Description: When teachers need to be away for illness or appointments, they are expected to create highly detailed plans for their supply teacher to use. Since the days of leaving a post-it note: “just put on a movie” are gone, these plans often take hours and can contribute to teacher burnout and high student disengagement. Behold, a web application that will do it all for you! Simply select the grade, level of supply teacher involvement, available materials and let the application do the rest so you, the teacher can rest up and focus on recovery! 
 
